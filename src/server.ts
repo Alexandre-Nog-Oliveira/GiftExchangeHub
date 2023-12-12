@@ -3,12 +3,19 @@ import express from 'express';
 import cors from 'cors';
 import https from 'https';
 import http from 'http';
+import siteRoutes from './routes/site'
+import { middleware } from './utils/middleware';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+app.all('*', middleware)
+
+//app.use('/admin', adminRoutes);
+app.use('/', siteRoutes);
 
 const runSever =(port: number, server: http.Server) =>{
     server.listen(port, () => {
