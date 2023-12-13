@@ -4,6 +4,7 @@ import cors from 'cors';
 import https from 'https';
 import http from 'http';
 import siteRoutes from './routes/site'
+import adminRoutes from './routes/admin'
 import { middleware } from './utils/middleware';
 
 const app = express();
@@ -14,7 +15,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.all('*', middleware)
 
-//app.use('/admin', adminRoutes);
+app.use('/admin', adminRoutes);
 app.use('/', siteRoutes);
 
 const runSever =(port: number, server: http.Server) =>{
